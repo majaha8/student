@@ -1,0 +1,33 @@
+{%extends "base.html"%}
+
+<div class="container">
+    <div class="container has-text-centred">
+        <h1 class="title has-text-primary">User</h1>
+    </div>
+
+<div class="container box">
+
+    table class='table'
+    <thead>
+        <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+        {%for user in users%}
+            <tr>
+                <td>{{user.username}}</td>
+                <td>{{user.email}}</td>
+                <td>
+                    <a href="{{url_for('edit_user', user_id=user.id)}}">Edit</a>
+                    <a href="{{url_for('delete_user', user_id=user.id)}}">Delete</a>
+                </td>
+            </tr>
+        {%endfor%}
+    </tbody>
+    </table>
+  </div>
+</div>
+{%endblock%}

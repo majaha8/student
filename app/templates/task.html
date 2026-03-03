@@ -1,0 +1,66 @@
+{% extends 'base.html' %} {% block content %}
+
+<div id="modal-js-task" class="modal is-active">
+    <div class="modal-background"></div>
+
+    <div class="modal-card" style="max-width: 400px">
+        <!-- Header -->
+        <header class="modal-card-head">
+            <p class="modal-card-title has-text-centered has-text-weight-bold">
+                Add New Task
+            </p>
+            <button class="delete" aria-label="close"></button>
+        </header>
+
+        <!-- Body -->
+        <section class="modal-card-body">
+            <form method="POST" action="{{ url_for('main.add_task') }}">
+                <!-- Task Title -->
+                <div class="field">
+                    <label class="label">Task Title *</label>
+                    <input
+                        class="input"
+                        name="task_title"
+                        type="text"
+                        required
+                    />
+                </div>
+                {%include 'add_category.html'%}
+
+                <!-- Deadline -->
+                <div class="field">
+                    <label class="label">Deadline *</label>
+                    <input class="input" name="deadline" type="date" required />
+                </div>
+
+                <!-- Notes -->
+                <div class="field">
+                    <label class="label">Notes</label>
+                    <textarea class="textarea" name="notes"></textarea>
+                </div>
+
+                <!-- Submit -->
+                <div class="field">
+                    <button type="submit" class="button is-black is-fullwidth">
+                        Add Task
+                    </button>
+                </div>
+            </form>
+
+            <!-- Feedback area for HTMX response -->
+            <div id="form-message" class="has-text-centered mt-3"></div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="modal-card-foot is-flex is-flex-direction-column">
+            <a
+                href="{{ url_for('main.index') }}"
+                class="button is-white is-fullwidth is-ghost has-text-dark"
+            >
+                Cancel
+            </a>
+        </footer>
+    </div>
+</div>
+
+{% endblock %}

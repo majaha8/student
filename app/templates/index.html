@@ -1,0 +1,17 @@
+{%extends 'base.html'%} {%include 'navbar.html'%} {%include 'main.html'%}
+{%block content%}
+
+<div class="columns is-vcentered mt-2 px-3">
+    <div class="column is-7">{% include 'search.html' %}</div>
+
+    <div class="column is-5">{% include 'category.html' %}</div>
+</div>
+<div class="column is-5">
+    <div
+        class="box is-flex is-align-items-center"
+        style="border-radius: 999px; width: fit-content"
+    >
+        {% include 'status.html' %}
+    </div>
+</div>
+{% include 'add_tasks.html' %} {% endblock %}

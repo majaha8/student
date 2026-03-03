@@ -1,0 +1,100 @@
+{% extends "base.html" %} {% block content %}
+<section
+    class="section has-background-light is-flex is-align-items-center is-fullheight"
+>
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="column is-4">
+                <div class="box is-rounded p-6">
+                    <div class="has-text-centered mb-5">
+                        <span class="icon-box has-text-white">
+                            <span class="icon is-large">
+                                <i class="fas fa-clipboard-check fa-2x"></i>
+                            </span>
+                        </span>
+                        <h1 class="title is-3 mt-4 mb-2">Create Account</h1>
+                        <p class="subtitle is-6 has-text-grey">
+                            Register to start organizing your tasks
+                        </p>
+                    </div>
+
+                    <form action="{{ url_for('auth.register') }}" method="POST">
+                        <div class="field mb-4">
+                            <label class="label">Username</label>
+                            <div class="control">
+                                <input
+                                    class="input is-shadowless custom-input"
+                                    type="text"
+                                    name="username"
+                                    placeholder="John Doe"
+                                />
+                            </div>
+                        </div>
+
+                        <div class="field mb-4">
+                            <label class="label">Email</label>
+                            <div class="control">
+                                <input
+                                    class="input is-shadowless"
+                                    type="email"
+                                    name="email"
+                                    placeholder="student@example.com"
+                                    style="
+                                        background-color: #f3f5f7;
+                                        border: none;
+                                        height: 45px;
+                                    "
+                                />
+                            </div>
+                        </div>
+
+                        <div class="field mb-4">
+                            <label class="label">Password</label>
+                            <div class="control">
+                                <input
+                                    class="input is-shadowless"
+                                    type="password"
+                                    name="password"
+                                    placeholder="Create a password (min. 6 characters)"
+                                    style="
+                                        background-color: #f3f5f7;
+                                        border: none;
+                                        height: 45px;
+                                    "
+                                />
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="control">
+                                <button
+                                    class="button is-fullwidth has-text-weight-bold"
+                                    style="
+                                        background-color: #0d1117;
+                                        color: white;
+                                        border-radius: 8px;
+                                        height: 50px;
+                                    "
+                                >
+                                    Create Account
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="has-text-centered mt-5">
+                        <p class="is-size-7 has-text-grey">
+                            Already have an account?
+                            <a
+                                href="{{ url_for('auth.login') }}"
+                                class="has-text-weight-bold has-text-black"
+                                >Login here</a
+                            >
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

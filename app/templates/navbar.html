@@ -1,0 +1,94 @@
+{%extends 'base.html'%}{%block content%}
+<style>
+    .add-task-btn {
+        background: linear-gradient(135deg, #4f8dfd, #6c4cff);
+        color: white;
+        border: none;
+    }
+
+    .add-task-btn:hover {
+        color: white;
+        transform: translateY(-1px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+    .log-out-btn {
+        background: linear-gradient(135deg, #ffffff);
+        color: white;
+        border: none;
+    }
+    .log-out-btn:hover {
+        color: white;
+        transform: translateY(-1px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+    .stats-btn {
+        background: linear-gradient(135deg, #ffffff);
+        color: white;
+        border: none;
+    }
+    .stats-btn:hover {
+        color: white;
+        transform: translateY(-1px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+</style>
+
+<!-- <section class="section pt-0 pb-0 py-0 has-background-light">-->
+<div class="container">
+    <nav class="level">
+        <div class="left-left">
+            <div class="level-item">
+                <span class="icon is-large has-text-black mr-3">
+                    <i class="fas fa-clipboard-list fa-2x"></i>
+                </span>
+                <div>
+                    <h1 class="title is-3 has-text-weight-bold mb-0">
+                        STUDENT ACTIVITY APP
+                    </h1>
+                    <p class="subtitle is-6 has-text-grey mt-1">
+                        Organize your academic and personal tasks {%if
+                        current_user.is_authenticated %}
+                        <br />
+                        Logged in as,
+                        <strong>{{ current_user.username }}</strong>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="level-right">
+            <div class="level-item buttons">
+                <!-- Hide Stats -->
+                <button class="button stats-btn is-light is-rectangle px-4">
+                    <span class="icon">
+                        <i class="fas fa-chart-line"></i>
+                    </span>
+                    <span>Hide Stats</span>
+                </button>
+
+                <!-- Add Task -->
+                <a
+                    href="{{ url_for('main.task') }}"
+                    class="button add-task-btn is-rectangle px-5"
+                >
+                    <span class="icon">
+                        <i class="fas fa-plus"></i>
+                    </span>
+                    <span class="has-text-weight-semibold">Add Task</span>
+                </a>
+
+                <!-- Logout -->
+                <a
+                    href="{{ url_for('auth.logout') }}"
+                    class="button log-out-btn is-rectangle px-4"
+                >
+                    <span class="icon">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </span>
+                    <span class="has-text-weight-semibold">Logout</span>
+                </a>
+            </div>
+        </div>
+        {%endblock%}
+    </nav>
+</div>

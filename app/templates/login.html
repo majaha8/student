@@ -1,0 +1,75 @@
+{% extends "base.html" %} {% block content %}
+
+<section class="section login-background">
+    <div class="container">
+        <div class="columns is-centered is-vcentered" style="min-height: 90vh">
+            <div class="column is-4">
+                <div class="box login-card">
+                    <!-- Icon -->
+                    <div class="has-text-centered mb-5">
+                        <span class="icon is-large login-icon">
+                            <i class="fas fa-clipboard-list fa-2x"></i>
+                        </span>
+                    </div>
+
+                    <!-- Title -->
+                    <div class="has-text-centered mb-4">
+                        <h1 class="title is-4">Welcome Back</h1>
+                        <p class="has-text-grey">
+                            Sign in to access your Student Activity To-Do System
+                        </p>
+                    </div>
+
+                    <!-- Form -->
+                    <form action="{{ url_for('auth.login') }}" method="POST">
+                        <div class="field">
+                            <label class="label">Email</label>
+                            <div class="control">
+                                <input
+                                    class="input"
+                                    type="email"
+                                    name="email"
+                                    placeholder="student@example.com"
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Password</label>
+                            <div class="control">
+                                <input
+                                    class="input"
+                                    type="password"
+                                    name="password"
+                                    placeholder="Enter your password"
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        <div class="field mt-5">
+                            <div class="control">
+                                <button class="button is-dark is-fullwidth">
+                                    Login
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Register Link -->
+                    <div class="has-text-centered mt-4">
+                        <p>
+                            Don't have an account?
+                            <a href="{{ url_for('auth.register') }}"
+                                >Register here</a
+                            >
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

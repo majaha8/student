@@ -1,0 +1,92 @@
+<style>
+    .stat-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .stat-number {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    .stat-text {
+        font-size: 0.875rem;
+        color: #666;
+    }
+
+    .blue {
+        background-color: #87ceeb;
+    }
+
+    .purple {
+        background-color: #da70d6;
+    }
+
+    .green {
+        background-color: #90ee90;
+    }
+
+    .red {
+        background-color: #ff6347;
+    }
+</style>
+
+<section class="container mt-2">
+    <div class="columns is-mobile is-multiline">
+        <!-- Total Tasks -->
+        <div class="column is-3">
+            <div class="stat-card blue">
+                <div>
+                    <p class="stat-number">{{ tasks|length }}</p>
+                    <p class="stat-text">Total Tasks</p>
+                </div>
+                <span class="icon">
+                    <i class="fas fa-clipboard-list"></i>
+                </span>
+            </div>
+        </div>
+
+        <!-- Active -->
+        <div class="column is-3">
+            <div class="stat-card purple">
+                <div>
+                    <p class="stat-number">{{ tasks|length }}</p>
+                    <p class="stat-text">Active Tasks</p>
+                </div>
+                <span class="icon">
+                    <i class="fas fa-bolt"></i>
+                </span>
+            </div>
+        </div>
+
+        <!-- Completed -->
+        <div class="column is-3">
+            <div class="stat-card green">
+                <div>
+                    <p class="stat-number">0</p>
+                    <p class="stat-text">Completed</p>
+                </div>
+                <span class="icon">
+                    <i class="fas fa-check-circle"></i>
+                </span>
+            </div>
+        </div>
+
+        <!-- Overdue -->
+        <div class="column is-3">
+            <div class="stat-card red">
+                <div>
+                    <p class="stat-number">0</p>
+                    <p class="stat-text">Overdue</p>
+                </div>
+                <span class="icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+</section>

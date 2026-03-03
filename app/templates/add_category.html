@@ -1,0 +1,18 @@
+<!-- Category -->
+
+<div class="field">
+    <label class="label">Category *</label>
+    <div class="control">
+        <div class="select is-fullwidth">
+            <select name="category" required>
+                <option value="">-- Choose --</option>
+
+                {% for category in categories %}
+                <option value="{{ category.id }}">
+                    {{ category.cat_name }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+</div>
