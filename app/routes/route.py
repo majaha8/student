@@ -85,19 +85,20 @@ def search():
     ).all()
     return render_template("search.html", tasks=tasks)
 
-    @main.route("/delete_task/<int:task_id>", methods=["POST"])
-    def delete(task_id):
 
-        task = db.session.get(Task, task_id)
+@main.route("/delete_task/<int:task_id>", methods=["POST"])
+@login_required
+def delete(task_id):
+    task = db.session.get(Task, task_id)
+    if not task:
+        abort(404)
+    db.session.delete(task)
+    db.session.commit()
+    return redirect(url_for("main.index"))
 
-        if not task:
-            abort(404)
 
-        db.session.delete(task)
-        db.session.commit()
-
-        return redirect(url_for("main.index"))
 @main.route("/update_task/<int:task_id>", methods=["GET", "POST"])
+@login_required
 def update_task(task_id):
 
     task = db.session.get(Task, task_id)
