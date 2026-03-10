@@ -14,7 +14,21 @@
 
         <!-- Body -->
         <section class="modal-card-body">
-            <form method="POST" action="{{ url_for('main.add_task') }}">
+            <form
+                method="POST"
+                {%
+                if
+                task
+                %}
+                action="{{ url_for('main.update_task', task_id=task.id) }}"
+                {%
+                else
+                %}
+                action="{{ url_for('main.add_task') }}"
+                {%
+                endif
+                %}
+            >
                 <!-- Task Title -->
                 <div class="field">
                     <label class="label">Task Title *</label>
@@ -22,27 +36,36 @@
                         class="input"
                         name="task_title"
                         type="text"
-                        required
+                        value="{{ task.task if task }}"
                     />
+                    required />
                 </div>
                 {%include 'add_category.html'%}
 
                 <!-- Deadline -->
                 <div class="field">
                     <label class="label">Deadline *</label>
-                    <input class="input" name="deadline" type="date" required />
+                    <input
+                        class="input"
+                        name="deadline"
+                        type="date"
+                        value="{{ task.deadline.strftime('%Y-%m-%d') if task and task.deadline }}"
+                    />required />
                 </div>
 
                 <!-- Notes -->
                 <div class="field">
                     <label class="label">Notes</label>
-                    <textarea class="textarea" name="notes"></textarea>
+                    <textarea class="textarea" name="notes">
+{{ task.notes if task and task.notes else '' }}</textarea
+                    >
                 </div>
 
                 <!-- Submit -->
                 <div class="field">
                     <button type="submit" class="button is-black is-fullwidth">
-                        Add Task
+                        {% if task %} Update Task {% else %} Add Task {% endif
+                        %}
                     </button>
                 </div>
             </form>

@@ -45,12 +45,16 @@
             </div>
 
             <div class="is-flex">
+                <a href="{{ url_for('main.update_task', task_id=task.id) }}"
                 <button class="button is-white has-text-dark p-2 mx-1">
                     <i class="fa-solid fa-pencil is-size-6"></i>
                 </button>
+                </a>
+                <a href="{{ url_for('main.delete', task_id=task.id) }}">
                 <button class="button is-white has-text-danger p-2 mx-1">
                     <i class="fa-regular fa-trash-can is-size-5"></i>
                 </button>
+                </a>
             </div>
         </div>
     </div>

@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from flask import Blueprint, flash, redirect, render_template, request, url_for
+from flask import Blueprint, abort, flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
 
 from app.extension import db, login_manager
@@ -84,3 +84,45 @@ def search():
         Task.task.ilike(f"%{query}%"), Task.user_id == current_user.id
     ).all()
     return render_template("search.html", tasks=tasks)
+
+    @main.route("/delete_task/<int:task_id>", methods=["POST"])
+    def delete(task_id):
+
+        task = db.session.get(Task, task_id)
+
+        if not task:
+            abort(404)
+
+        db.session.delete(task)
+        db.session.commit()
+
+        return redirect(url_for("main.index"))
+@main.route("/update_task/<int:task_id>", methods=["GET", "POST"])
+def update_task(task_id):
+
+    task = db.session.get(Task, task_id)
+
+    if not task:
+        abort(404)
+
+    if request.method == "POST":
+        task.task = request.form.get("task", "")
+
+        task.category_id = int(request.form.get("category", ""))
+
+        deadline_str = request.form.get("deadline")
+
+        if deadline_str:
+            task.deadline = datetime.strptime(deadline_str, "%Y-%m-%d")
+        else:
+            task.deadline = None
+
+        task.notes = request.form.get("notes")
+
+        db.session.commit()
+
+        return redirect(url_for("main.index"))
+
+    categories = Category.query.all()
+
+    return render_template("task.html", task=task, categories=categories)
