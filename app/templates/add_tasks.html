@@ -9,18 +9,21 @@
         >
             <div class="is-flex is-align-items-start">
                 <div class="mr-4 mt-1">
-                    <input
-                        type="checkbox"
-                        name="completed"
-                        class="is-clickable"
-                        style="width: 18px; height: 18px; cursor: pointer; border-radius: 4px;"
-                        {% if task.completed %} checked {% endif %}
+                    <form
                         hx-post="{{ url_for('main.toggle', task_id=task.id) }}"
-                        hx-swap="none"
                         hx-trigger="change"
-
-                    />
-
+                        hx-target="this"
+                        hx-swap="none"
+                        hx-on::after-request="window.location.reload()"
+                    >
+                        <input
+                            type="checkbox"
+                            name="completed"
+                            class="is-clickable"
+                            style="width: 18px; height: 18px; cursor: pointer; border-radius: 4px;"
+                            {% if task.completed %} checked {% endif %}
+                        />
+                    </form>
                 </div>
 
                 <div>
