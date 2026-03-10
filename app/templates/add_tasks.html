@@ -11,13 +11,21 @@
                 <div class="mr-4 mt-1">
                     <input
                         type="checkbox"
-                        style="
-                            width: 18px;
-                            height: 18px;
-                            cursor: pointer;
-                            border-radius: 4px;
-                        "
+                        name="completed"
+                        class="is-clickable"
+                        style="width: 18px; height: 18px; cursor: pointer; border-radius: 4px;"
+                        {% if task.completed %} checked {% endif %}
+                        hx-post="{{ url_for('main.toggle', task_id=task.id) }}"
+                        hx-swap="none"
+                        hx-trigger="change"
                     />
+                    <label class="ml-2">
+                        {% if task.completed %}
+                            Completed Task
+                        {% else %}
+                            Mark as Completed
+                        {% endif %}
+                    </label>
                 </div>
 
                 <div>
@@ -50,11 +58,11 @@
                     <i class="fa-solid fa-pencil is-size-6"></i>
                 </button>
                 </a>
-                <a href="{{ url_for('main.delete', task_id=task.id) }}">
-                <button class="button is-white has-text-danger p-2 mx-1">
-                    <i class="fa-regular fa-trash-can is-size-5"></i>
-                </button>
-                </a>
+                <form action="{{ url_for('main.delete', task_id=task.id) }}" method="POST">
+                    <button type="submit" class="button is-white has-text-danger p-2 mx-1">
+                        <i class="fa-regular fa-trash-can is-size-5"></i>
+                    </button>
+                </form>
             </div>
         </div>
     </div>

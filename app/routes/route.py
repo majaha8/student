@@ -15,7 +15,10 @@ def index():
     tasks = Task.query.filter_by(
         user_id=current_user.id
     ).all()  # get tasks from database
-    return render_template("index.html", user=current_user, tasks=tasks)
+    completed = Task.query.filter_by(completed=True).count()  # count completed tasks
+    return render_template(
+        "index.html", user=current_user, tasks=tasks, completed=completed
+    )
 
 
 @main.route("/task")
@@ -90,10 +93,13 @@ def search():
 @login_required
 def delete(task_id):
     task = db.session.get(Task, task_id)
+
     if not task:
         abort(404)
+
     db.session.delete(task)
     db.session.commit()
+    print("task deleted")
     return redirect(url_for("main.index"))
 
 
