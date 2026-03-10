@@ -16,8 +16,16 @@ def index():
         user_id=current_user.id
     ).all()  # get tasks from database
     completed = Task.query.filter_by(completed=True).count()  # count completed tasks
+    overdue_tasks = Task.query.filter(
+        Task.completed.is_(False), Task.deadline < datetime.today()
+    ).count()
     return render_template(
-        "index.html", user=current_user, tasks=tasks, completed=completed
+        "index.html",
+        user=current_user,
+        tasks=tasks,
+        completed=completed,
+        overdue_tasks=overdue_tasks,
+        now=datetime.today(),
     )
 
 
@@ -113,7 +121,7 @@ def update_task(task_id):
         abort(404)
 
     if request.method == "POST":
-        task.task = request.form.get("task", "")
+        task.task = request.form.get("task_title", "")
 
         task.category_id = int(request.form.get("category", ""))
 
@@ -147,3 +155,12 @@ def toggle(task_id):
     db.session.commit()
 
     return redirect(url_for("main.index"))
+
+
+@main.route("/overdue_count")
+@login_required
+def overdue_count():
+    overdue_tasks = Task.query.filter(
+        Task.completed.is_(False), Task.deadline < datetime.today()
+    ).count()
+    return str(overdue_tasks)

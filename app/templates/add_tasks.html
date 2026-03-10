@@ -37,11 +37,13 @@
                         </span>
 
                         <span
-                            class="has-text-grey is-size-7 is-flex is-align-items-center"
+                            class="has-text-grey is-size-7 is-flex is-align-items-center
+                            {% if task.deadline and not task.completed and task.deadline < now %}
+                                has-text-danger has-text-weight-bold
+                            {% endif %}"
                         >
                             <i class="far fa-calendar-alt mr-2"></i>
-                            {{ task.deadline.strftime('%b %d, %Y') if
-                            task.deadline else 'No deadline' }}
+                            {{ task.deadline.strftime('%b %d, %Y') if task.deadline else 'No deadline' }}
                         </span>
                     </div>
                 </div>
