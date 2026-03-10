@@ -18,14 +18,9 @@
                         hx-post="{{ url_for('main.toggle', task_id=task.id) }}"
                         hx-swap="none"
                         hx-trigger="change"
+
                     />
-                    <label class="ml-2">
-                        {% if task.completed %}
-                            Completed Task
-                        {% else %}
-                            Mark as Completed
-                        {% endif %}
-                    </label>
+
                 </div>
 
                 <div>

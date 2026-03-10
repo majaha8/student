@@ -133,3 +133,17 @@ def update_task(task_id):
     categories = Category.query.all()
 
     return render_template("task.html", task=task, categories=categories)
+
+
+@main.route("/toggle/<int:task_id>", methods=["POST"])
+@login_required
+def toggle(task_id):
+    task = db.session.get(Task, task_id)
+
+    if not task:
+        abort(404)
+
+    task.completed = not task.completed
+    db.session.commit()
+
+    return redirect(url_for("main.index"))
